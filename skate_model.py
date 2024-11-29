@@ -47,10 +47,13 @@ FRAME_HEIGHT, FRAME_WIDTH = num1,num1
 SEQ_LEN = num2;
 if(num3 == 0):
     DATASET_DIR = 'tricks_data_set_osika'
+    CH = 3
 elif(num3 == 1):
     DATASET_DIR = 'tricks_data_set_osika_grey'
+    CH = 1
 elif(num3 == 2):
     DATASET_DIR = 'tricks_data_set_osika_bgr'
+    CH = 3
 
 CLASSES_LIST = os.listdir(f'{DATASET_DIR}')
 
@@ -75,7 +78,10 @@ def extract_frames(path_to_video):
 
         #value then lies between 0 and 1
         normalized_frame = resized_frame / 255
-
+        
+        if(num3 == 1):
+            normalized_frame = normalized_frame[..., 0]  #greyscale trick
+            
         frames_list.append(normalized_frame)
 
     while len(frames_list) < SEQ_LEN:
@@ -129,7 +135,7 @@ def create_convlstm_model():
 
     model.add(ConvLSTM2D(filters = 4, kernel_size = (3, 3), activation = 'tanh',data_format = "channels_last",
                          recurrent_dropout=0.2, return_sequences=True, input_shape = (SEQ_LEN,
-                                                                                      FRAME_HEIGHT, FRAME_WIDTH, 3)))
+                                                                                      FRAME_HEIGHT, FRAME_WIDTH, CH)))
 
     model.add(MaxPooling3D(pool_size=(1, 2, 2), padding='same', data_format='channels_last'))
     model.add(TimeDistributed(Dropout(0.2)))
@@ -190,7 +196,7 @@ def plot_metric(model_training_history, metric_name_1, metric_name_2, plot_name,
     metric_value_2 = model_training_history.history[metric_name_2]
 
     epochs = range(len(metric_value_1))
-
+    plt.figure()
 
     plt.plot(epochs, metric_value_1, 'blue', label = metric_name_1)
     plt.plot(epochs, metric_value_2, 'red', label = metric_name_2)
@@ -207,17 +213,17 @@ def plot_metric(model_training_history, metric_name_1, metric_name_2, plot_name,
     plt.savefig(f'./{title}_{DATASET_DIR}_{SEQ_LEN}_{FRAME_HEIGHT}_{current_date_time_string}_{plot_name}.png')
 
 def plot_confusion_matrix(model, X_test, y_test, title):
-    # 1. Uzyskaj predykcje modelu na zbiorze testowym
+    
     y_pred_proba = model.predict(X_test)
     y_pred = np.argmax(y_pred_proba, axis=1)
 
-    # 2. Skonwertuj prawdziwe etykiety do wektora (jeśli są w formie one-hot)
+    
     y_true = np.argmax(y_test, axis=1)
 
-    # 3. Wygeneruj macierz trafień
+   
     cm = confusion_matrix(y_true, y_pred)
 
-    # 4. Wyświetl macierz trafień
+    plt.figure()
     disp = ConfusionMatrixDisplay(confusion_matrix=cm)
     disp.plot(cmap=plt.cm.Blues)
     plt.xlabel("Predicted Label")
@@ -249,7 +255,7 @@ def create_LRCN_model():
     ########################################################################################################################
 
     model.add(TimeDistributed(Conv2D(16, (3, 3), padding='same',activation = 'relu'),
-                              input_shape = (SEQ_LEN, FRAME_HEIGHT, FRAME_WIDTH, 3)))
+                              input_shape = (SEQ_LEN, FRAME_HEIGHT, FRAME_WIDTH, CH)))
 
     model.add(TimeDistributed(MaxPooling2D((4, 4))))
     model.add(TimeDistributed(Dropout(0.25)))

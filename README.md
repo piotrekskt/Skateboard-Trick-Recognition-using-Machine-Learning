@@ -26,8 +26,9 @@ The project implements two primary models:
 
 ### Key Results
 
-- **ConvLSTM** achieved an accuracy of **81.88%** on the augmented grayscale dataset, making it the top-performing model.
-- **LRCN** reached **71.25% accuracy** under similar conditions but was less effective for complex tricks involving multi-axis rotations.
+- **LRCN** reached **82.82% accuracy** on the augumented BGR dataset without background making it the top-performing model. SEQ_LEN = 30 , FRAME_SIZE = 150x150 
+- **ConvLSTM** achieved an accuracy of **81.88%** on the augmented grayscale dataset, what was the best performance for this model. SEQ_LEN = 50 , FRAME_SIZE = 100x100 
+
 
 ---
 
