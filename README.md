@@ -17,12 +17,24 @@ The final dataset consists of three main versions:
 3. **Augmented, grayscale, background removed** - 1,535 samples
 
 This rigorous preparation ensures that the models are tested on a highly diverse set of samples that are prepered for movment recognition.
+![Grey-dataset preview](https://github.com/user-attachments/assets/b47ea034-7b59-4023-8305-b4afa044deb2)
+
+![bgr-dataset preview](https://github.com/user-attachments/assets/65197837-bb81-4e45-8fc9-9d8c0a97c642)
 
 ## Models
 
 The project implements two primary models:
 1. **ConvLSTM (Convolutional Long Short-Term Memory)** integrates convolutional and LSTM layers to simultaneously capture spatial and temporal features, ideal for identifying trick dynamics.
-2. **LRCN (Long-term Recurrent Convolutional Networks)** processes frames sequentially, first extracting spatial features with CNN and then temporal dependencies with LSTM. This model is faster but may struggle with complex sequences.
+   ![convlstm_model_plot](https://github.com/user-attachments/assets/6d928c9b-827a-444b-9fcd-efbd9923aba7)
+
+3. **LRCN (Long-term Recurrent Convolutional Networks)** processes frames sequentially, first extracting spatial features with CNN and then temporal dependencies with LSTM. This model is faster but may struggle with complex sequences.
+   ![LRCN_model_plot](https://github.com/user-attachments/assets/1daaa1fe-df13-45f0-a4ed-cb32f30fdbeb)
+
+### Training
+Best results for LRCN:
+![LRCN](https://github.com/user-attachments/assets/68ac2fd2-7e3f-4df2-a8c2-b010e3362a02)
+Confusion matrix:
+![LRCN_tricks_data_set_osika_bgr_30_150_2024_11_29__02_38_22_confusion_matrix](https://github.com/user-attachments/assets/148fc257-373a-458c-a9a1-94b0c4444d86)
 
 ### Key Results
 
