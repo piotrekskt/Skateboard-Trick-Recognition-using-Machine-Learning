@@ -33,7 +33,6 @@ The project implements two primary models:
 ### Training
 Best results for LRCN:
 ![LRCN](https://github.com/user-attachments/assets/68ac2fd2-7e3f-4df2-a8c2-b010e3362a02)
-Confusion matrix:
 ![LRCN_tricks_data_set_osika_bgr_30_150_2024_11_29__02_38_22_confusion_matrix](https://github.com/user-attachments/assets/148fc257-373a-458c-a9a1-94b0c4444d86)
 
 ### Key Results
