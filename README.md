@@ -1,7 +1,7 @@
 # Skateboard Trick Recognition using Machine Learning
 
 This project applies machine learning to recognize skateboard tricks in video sequences. By training and testing on custom video datasets, it evaluates the performance of ConvLSTM and LRCN models in classifying complex skateboarding tricks. The project involves significant preprocessing and data augmentation to optimize the model's ability to identify subtle differences between movment of the tricks.
-
+background_remover.py code was used for removing the background, then augument_dataset.py for applying the augmentation and after that skate_model.py for preprocessing the dataset and traning.
 ## Dataset
 
 The dataset used in this project was entirely created and curated by me. It features five distinct skateboarding tricks (e.g., Ollie, Backside 180, Pop Shuv-it, Kickflip, and 360 Flip), recorded in diverse locations with varied lighting and perspectives to increase sample diversity. Each trick was performed multiple times to capture different angles and nuances in execution, with a minimum of 50 unique video samples per trick, totaling **307 original samples**.
