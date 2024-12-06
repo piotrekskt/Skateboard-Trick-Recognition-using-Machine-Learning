@@ -25,10 +25,10 @@ This rigorous preparation ensures that the models are tested on a highly diverse
 
 The project implements two primary models:
 1. **ConvLSTM (Convolutional Long Short-Term Memory)** integrates convolutional and LSTM layers to simultaneously capture spatial and temporal features, ideal for identifying trick dynamics.
-   ![convlstm_model_plot](https://github.com/user-attachments/assets/6d928c9b-827a-444b-9fcd-efbd9923aba7)
+
 
 3. **LRCN (Long-term Recurrent Convolutional Networks)** processes frames sequentially, first extracting spatial features with CNN and then temporal dependencies with LSTM. This model is faster but may struggle with complex sequences.
-   ![LRCN_model_plot](https://github.com/user-attachments/assets/1daaa1fe-df13-45f0-a4ed-cb32f30fdbeb)
+
 
 ### Training
 Best results for LRCN:
